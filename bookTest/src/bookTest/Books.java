@@ -3,15 +3,15 @@ package bookTest;
 public class Books {
 	private int id;    
 	private String title;
-	private String publish; 
+	private String publisher; 
 	private String year; 
 	private int price;
 	
-	public Books(int id, String title, String publish, String year, int price) {
+	public Books(int id, String title, String publisher, String year, int price) {
 		super();
 		this.id = id;
 		this.title = title;
-		this.publish = publish;
+		this.publisher = publisher;
 		this.year = year;
 		this.price = price;
 	}
@@ -32,12 +32,12 @@ public class Books {
 		this.title = title;
 	}
 
-	public String getPublish() {
-		return publish;
+	public String getPublisher() {
+		return publisher;
 	}
 
-	public void setPublish(String publish) {
-		this.publish = publish;
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
 	}
 
 	public String getYear() {
@@ -58,7 +58,7 @@ public class Books {
 
 	@Override
 	public String toString() {
-		return "Books [id=" + id + ", title=" + title + ", publish=" + publish + ", year=" + year + ", price=" + price
+		return "Books [id=" + id + ", title=" + title + ", publisher=" + publisher + ", year=" + year + ", price=" + price
 				+ "]";
 	}
 	

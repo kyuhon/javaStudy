@@ -31,7 +31,7 @@ public class BooksMain {
 			case DELETE:
 				booksDelete();
 				break;
-				
+
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + num);
 
@@ -39,8 +39,8 @@ public class BooksMain {
 		}
 		System.out.println("The end");
 	}
-
-	private static void booksDelete() {
+	//삭제
+	private static void booksDelete() throws SQLException {
 		// Connection
 		Connection con = null;
 		Statement stmt = null;
@@ -53,14 +53,15 @@ public class BooksMain {
 		stmt = con.createStatement();
 		int result = stmt.executeUpdate("delete from books where id = " + no);
 		// 4. 내용이 잘 입력이 되었는지 check
-		System.out.println((result != 0)? "삭제성공": "삭제실패");
+		System.out.println((result != 0) ? "삭제성공" : "삭제실패");
 		// 5. 출력하기
 		// 6. sql 객체 반납
 		DBConnection.dbClose(con, stmt);
 
 	}
-
-	private static void booksUpdate() {
+	
+	//수정
+	private static void booksUpdate() throws SQLException {
 		// Connection
 		Connection con = null;
 		Statement stmt = null;
@@ -68,43 +69,43 @@ public class BooksMain {
 		// 1 Load, 2 connect
 		con = DBConnection.dbCon();
 		// 3. statement
-		//수정할 데이터를 입력
-		Books books = new Books(3, "JAVA java" , "kdj", "2024", 33000);
-		String publisher = "kdj";
+		// 수정할 데이터를 입력
+		Books books = new Books(3, "JAVA java", "kdj", "2024", 33000);
+
 		stmt = con.createStatement();
-		int result = stmt.executeUpdate("update books set title = '"+
-		books.getTitle()+"',publisher = '"+books.getPublish()+"', year = '"+
-				books.getYear()+"', price = "+books.getPrice()+" where id = "+books.getId()+"");
+		int result = stmt.executeUpdate(
+				"update books set title = '" + books.getTitle() + "',publisher = '" + books.getPublisher() + "', year = '"
+						+ books.getYear() + "', price = " + books.getPrice() + " where id = " + books.getId() + "");
 		// 4. 내용이 잘 입력이 되었는지 check
-		System.out.println((result != 0)? "수정성공": "수정실패");
+		System.out.println((result != 0) ? "수정성공" : "수정실패");
 		// 5. 출력하기
 		// 6. sql 객체 반납
 		DBConnection.dbClose(con, stmt);
 
 	}
-
-	private static void booksInsert() {
+	//입력
+	private static void booksInsert() throws SQLException {
 		// Connection
-				Connection con = null;
-				Statement stmt = null;
+		Connection con = null;
+		Statement stmt = null;
 
-				// 1 Load, 2 connect
-				con = DBConnection.dbCon();
-				// 3. statement
-				Books books = new Books(0, "Head First JAVA" , "kdj", "2008", 23000);
-				String publisher = "kdj";
-				stmt = con.createStatement();
-				int result = stmt.executeUpdate("INSERT INTO books VALUES "
-						+ "(books_id_seq.nextval, '"+books.getTitle()+"' ,' "+ books.getpublisher+"','"+ books.getYear()+"',"+books.getPrice()+")");
-				// 4. 내용이 잘 입력이 되었는지 check
-				System.out.println((result != 0)? "입력성공": "입력실패");
-				// 5. 출력하기
-				// 6. sql 객체 반납
-				DBConnection.dbClose(con, stmt);
+		// 1 Load, 2 connect
+		con = DBConnection.dbCon();
+		// 3. statement
+		Books books = new Books(0, "Head First JAVA", "kdj", "2008", 23000);
+		String publisher = "kdj";
+		stmt = con.createStatement();
+		int result = stmt.executeUpdate("INSERT INTO books VALUES " + "(books_id_seq.nextval, '" + books.getTitle()
+				+ "' ,' " + books.getPublisher() + "','" + books.getYear() + "'," + books.getPrice() + ")");
+		// 4. 내용이 잘 입력이 되었는지 check
+		System.out.println((result != 0) ? "입력성공" : "입력실패");
+		// 5. 출력하기
+		// 6. sql 객체 반납
+		DBConnection.dbClose(con, stmt);
 
 	}
-
-	public static void booksPrint() {
+	//출력
+	public static void booksPrint() throws SQLException {
 		// Connection
 		Connection con = null;
 		Statement stmt = null;
@@ -123,6 +124,8 @@ public class BooksMain {
 			String publisher = rs.getString("PUBLISHER");
 			String year = rs.getString("YEAR");
 			int price = rs.getInt("PRICE");
+			Books books = new Books(id, title, publisher, year, price);
+			booksList.add(books);
 		}
 		// 5. 출력하기
 		booksListPrint(booksList);
@@ -131,7 +134,7 @@ public class BooksMain {
 	}
 
 	private static void printMenu() {
-		System.out.println("Books Menu(1. 출력, 2. 입력, 3.수정, 4.삭제 5.종료)");
+		System.out.println("Books Menu(1.출력, 2.입력, 3.수정, 4.삭제 5.종료)");
 		System.out.println(">>");
 	}
 
