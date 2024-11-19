@@ -4,7 +4,6 @@
 /**
  * 
  */
-module studentTest {
+module bookTest {
 	requires java.sql;
-	requires java.desktop;
 }
