@@ -54,8 +54,10 @@ public class BooksMain {
 		// 1 Load, 2 connect
 		con = DBConnection.dbCon();
 		// 3. statement
-		System.out.println("인상될 부서번호 입력: >>");
-		int department_id = Integer.parseInt(scan.nextLine());
+		System.out.println("인상될 ID 입력: >>");
+		int Id = Integer.parseInt(scan.nextLine());
+		System.out.println("인상률(ex)10%: 1.1): >>");
+		int incrementSalary = Integer.parseInt(scan.nextLine());
 		
 		// stmt = con.createStatement();
 		cstmt = con.prepareCall("{call EMP1_PROCEDURE(?)}");
