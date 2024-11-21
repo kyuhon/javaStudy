@@ -53,61 +53,7 @@ public class FoodMain {
 
 	}
 
-	private static void priceUpProc() throws SQLException {
-		// Connection
-				Connection con = null;
-				CallableStatement cstmt = null;
-
-				// 1 Load,2 connect
-				con = DBConnection.dbCon();
-				System.out.print("인상될 ID 입력: >>");
-				int id = Integer.parseInt(scan.nextLine());
-				System.out.print("인상금액: >>");
-				int price = Integer.parseInt(scan.nextLine());
-
-				// 3. cstmt = con.prepareCall("{call EMP1_PROCEDURE(?,?,?)}");
-				cstmt = con.prepareCall("{call FOOD_PROCEDURE(?, ?, ?)}");
-				cstmt.setInt(1, id);
-				cstmt.setDouble(2, price);
-				// 출력될 데이터값으로 4번을 바인딩시킨다.
-				cstmt.registerOutParameter(3, Types.VARCHAR);
-
-				int result = cstmt.executeUpdate();
-				String message = cstmt.getString(3);
-				System.out.println(message);
-				// 4.내용이 잘 입력이 되었는지 check
-				System.out.println((result != 0) ? "가격 인상 프로시저성공" : "가격 인상 프로시저실패");
-				// 6.sql 객체 반남
-				DBConnection.dbClose(con, cstmt);
-	}
-	private static void priceDownFunc() throws SQLException {
-		// Connection
-				Connection con = null;
-				CallableStatement cstmt = null;
-
-				// 1 Load,2 connect
-				con = DBConnection.dbCon();
-						
-				System.out.print("인하할 ID 입력: >>");
-				int id = Integer.parseInt(scan.nextLine());
-				System.out.println("인하금액: >>");
-				int price = Integer.parseInt(scan.nextLine());
-				
-				// 3. cstmt = con.prepareCall("{ ? = call BOOKS_FUNCTION(?)}");
-				cstmt = con.prepareCall("{ ? = call FOOD_FUNCTION(?,?)}");
-				cstmt.registerOutParameter(1, Types.VARCHAR);
-				cstmt.setInt(2, id);
-				cstmt.setInt(3, price);
-				// 출력될 데이터값으로 3번을 바인딩시킨다.
-
-				int result = cstmt.executeUpdate();
-				String message = cstmt.getString(1);
-				System.out.println(message);
-				// 4.내용이 잘 입력이 되었는지 check
-				System.out.println((result != 0) ? "FUNCTION 성공" : "FUNCTION 실패");
-				// 6.sql 객체 반남
-				DBConnection.dbClose(con, cstmt);
-	}
+	
 
 
 	private static void printMenu() {
@@ -189,6 +135,63 @@ public class FoodMain {
 				// 5. 출력하기
 				// 6. sql 객체 반납
 				DBConnection.dbClose(con, stmt);
+	}
+	
+	private static void priceUpProc() throws SQLException {
+		// Connection
+				Connection con = null;
+				CallableStatement cstmt = null;
+
+				// 1 Load,2 connect
+				con = DBConnection.dbCon();
+				System.out.print("인상될 ID 입력: >>");
+				int id = Integer.parseInt(scan.nextLine());
+				System.out.print("인상금액: >>");
+				int price = Integer.parseInt(scan.nextLine());
+
+				// 3. cstmt = con.prepareCall("{call EMP1_PROCEDURE(?,?,?)}");
+				cstmt = con.prepareCall("{call FOOD_PROCEDURE(?, ?, ?)}");
+				cstmt.setInt(1, id);
+				cstmt.setDouble(2, price);
+				// 출력될 데이터값으로 4번을 바인딩시킨다.
+				cstmt.registerOutParameter(3, Types.VARCHAR);
+
+				int result = cstmt.executeUpdate();
+				String message = cstmt.getString(3);
+				System.out.println(message);
+				// 4.내용이 잘 입력이 되었는지 check
+				System.out.println((result != 0) ? "가격 인상 프로시저성공" : "가격 인상 프로시저실패");
+				// 6.sql 객체 반남
+				DBConnection.dbClose(con, cstmt);
+	}
+	
+	private static void priceDownFunc() throws SQLException {
+		// Connection
+				Connection con = null;
+				CallableStatement cstmt = null;
+
+				// 1 Load,2 connect
+				con = DBConnection.dbCon();
+						
+				System.out.print("인하할 ID 입력: >>");
+				int id = Integer.parseInt(scan.nextLine());
+				System.out.println("인하금액: >>");
+				int price = Integer.parseInt(scan.nextLine());
+				
+				// 3. cstmt = con.prepareCall("{ ? = call BOOKS_FUNCTION(?)}");
+				cstmt = con.prepareCall("{ ? = call FOOD_FUNCTION(?,?)}");
+				cstmt.registerOutParameter(1, Types.VARCHAR);
+				cstmt.setInt(2, id);
+				cstmt.setInt(3, price);
+				// 출력될 데이터값으로 3번을 바인딩시킨다.
+
+				int result = cstmt.executeUpdate();
+				String message = cstmt.getString(1);
+				System.out.println(message);
+				// 4.내용이 잘 입력이 되었는지 check
+				System.out.println((result != 0) ? "FUNCTION 성공" : "FUNCTION 실패");
+				// 6.sql 객체 반남
+				DBConnection.dbClose(con, cstmt);
 	}
 
 	private static void foodsDelete() throws SQLException {
