@@ -4,9 +4,10 @@ public class LessonVO {
 	private int no; 		// --pk seq
 	private String abbre; 	// --과목요약
 	private String name; 	// --과목이름
+	
+	//생성자(디폴트 생성자, 매개변수 생성자) : 생성자 오버로딩
 	public LessonVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public LessonVO(int no, String abbre, String name) {
 		super();
@@ -14,6 +15,12 @@ public class LessonVO {
 		this.abbre = abbre;
 		this.name = name;
 	}
+	public LessonVO(String abbre, String name) {
+		super();
+		this.abbre = abbre;
+		this.name = name;
+	}
+	
 	public int getNo() {
 		return no;
 	}
@@ -32,9 +39,10 @@ public class LessonVO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	@Override
 	public String toString() {
-		return "[no=" + no + ", abbre=" + abbre + ", name=" + name + "]";
+		return "LessonVO [no=" + no + ", abbre=" + abbre + ", name=" + name + "]";
 	}
 	
 	

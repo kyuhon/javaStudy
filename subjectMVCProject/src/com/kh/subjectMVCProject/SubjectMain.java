@@ -82,7 +82,7 @@ public class SubjectMain {
 		
 	}
 	//과목정보
-	private static void lessonMenu() {
+	private static void lessonMenu() throws SQLException {
 		int no;
 		LessonRegisterManager lrm = new LessonRegisterManager();   
 
@@ -91,19 +91,19 @@ public class SubjectMain {
 		switch (no) {
 		case LESSON_CHOICE.INSERT:
 			System.out.println("");
-		//	srm.insertManager();
+			lrm.insertManager();
 			break;
 		case LESSON_CHOICE.UPDATE:
 			System.out.println("");
-//			studnetManager.studnetUpdate();
+			lrm.updateManager();
 			break;
 		case LESSON_CHOICE.LIST:
 			System.out.println("");
-//			studnetManager.studnetTotalList();
+			lrm.selectManager();
 			break;
 		case LESSON_CHOICE.DELETE:
 			System.out.println("");
-//			studnetManager.studnetTotalList();
+			lrm.deleteManager();
 			break;
 		case LESSON_CHOICE.MAIN:
 			return;

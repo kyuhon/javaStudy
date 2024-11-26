@@ -7,19 +7,27 @@ public class TraineeVO {
 	private String s_num;  	//--student(fk) 학생번호
 	private String abbre; 	//--lesson(fk) 과목요약
 	private String section; //--전공,부전공,교양
-	private Date tdate; 	//--수강신청일
+	private Date registDate; 	//--수강신청일
+	
+	//생성자
 	public TraineeVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public TraineeVO(int no, String s_num, String abbre, String section, Date tdate) {
+	public TraineeVO(int no, String s_num, String abbre, String section, Date registDate) {
 		super();
 		this.no = no;
 		this.s_num = s_num;
 		this.abbre = abbre;
 		this.section = section;
-		this.tdate = tdate;
+		this.registDate = registDate;
 	}
+	public TraineeVO(String s_num, String abbre, String section) {
+		super();
+		this.s_num = s_num;
+		this.abbre = abbre;
+		this.section = section;
+	}
+	
 	public int getNo() {
 		return no;
 	}
@@ -44,15 +52,18 @@ public class TraineeVO {
 	public void setSection(String section) {
 		this.section = section;
 	}
-	public Date getTdate() {
-		return tdate;
+	public Date getRegistDate() {
+		return registDate;
 	}
-	public void setTdate(Date tdate) {
-		this.tdate = tdate;
+	public void setRegistDate(Date registDate) {
+		this.registDate = registDate;
 	}
+	
 	@Override
 	public String toString() {
-		return "[no=" + no + ", s_num=" + s_num + ", abbre=" + abbre + ", section=" + section + ", tdate="
-				+ tdate + "]";
+		return "TraineeVO [no=" + no + ", s_num=" + s_num + ", abbre=" + abbre + ", section=" + section
+				+ ", registDate=" + registDate + "]";
 	}
+
+	
 }

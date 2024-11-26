@@ -15,7 +15,7 @@ public class DBUtility {
 
 	public static Connection dbCon()  {
 		Connection con = null;
-		// 1. db.properties file( id, pw, url setting)
+		// 1. db.properties file( id, pw, url setting) 
 		String filePath = "D:\\javaStudy\\subjectMVCProject\\src\\db.properties";
 		Properties pt = new Properties(); 
 		try {
@@ -30,7 +30,7 @@ public class DBUtility {
 		// 2. jdbc driver load 
 		// 3. db connect 
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Class.forName("oracle.jdbc.driver.OracleDriver");	// 적은 클래스를 로딩시킴
 			con = DriverManager.getConnection(url, id, pw);
 		} catch (ClassNotFoundException e) {
 			System.out.println(e.toString());
@@ -39,7 +39,7 @@ public class DBUtility {
 		}
 		return con;
 	}
-
+	//오버로딩
 	public static void dbClose(Connection con, Statement stmt, ResultSet rs) {
 		if (con != null) {
 			try {
