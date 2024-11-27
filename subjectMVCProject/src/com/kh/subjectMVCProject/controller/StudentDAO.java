@@ -14,6 +14,7 @@ import com.kh.subjectMVCProject.model.StudentVO;
 public class StudentDAO {
 		
 	public static final String STUDENT_SELECT = "SELECT * FROM STUDENT";
+	public static final String STUDENT_SELECT_SEARCH = "SELECT NUM, NAME, EMAIL FROM STUDENT WHERE NAME = ?";
     public static final String STUDENT_INSERT = "INSERT INTO STUDENT(NO, NAME, KOR, ENG, MAT) VALUES(STUDENT_NO_SEQ.NEXTVAL, ?, ?, ?, ?)";
     public static final String STUDENT_CALL_RANK_PROC = "{call STUDENT_RANK_PROC()}";
     public static final String STUDENT_UPDATE = "UPDATE STUDENT SET NAME = ?, KOR = ?, ENG = ?, MAT = ? WHERE NO = ?";
@@ -21,6 +22,7 @@ public class StudentDAO {
     public static final String STUDENT_SORT = "SELECT *FROM STUDENT ORDER BY RANK";
     public static final String STUDENT_ID_CHECK = "select COUNT(*) AS COUNT from student where id = ?";
     public static final String STUDENT_NUM_COUNT ="select LPAD(count(*)+1,4,'0') as total_count from student where s_num = ?";
+    
 	public static ArrayList<StudentVO> studentSelect() throws SQLException {
 		Connection con = null;
 		Statement stmt = null;
@@ -51,32 +53,37 @@ public class StudentDAO {
 		DBUtility.dbClose(con, stmt, rs);
 		return studentList;
 	}
+	public static ArrayList<StudentVO> studentNameSelect(String nameValue) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<StudentVO> studentList = new ArrayList<StudentVO>();
+		con = DBUtility.dbCon();
+		
+		pstmt = con.prepareStatement(STUDENT_SELECT_SEARCH);
+		pstmt.setString(1, name);
+		
+		if(rs.next()) {
+			do{
+				String num = rs.getString("NUM");
+				String name = rs.getString("NAME");
+				String emil = rs.getString("EMAIL");
+				StudentVO stu = new StudentVO();
+				stu.setNum(num);
+				stu.setName(name);
+				stu.setEmail(email);
+				
+				studentList.add(stu);
+			}while (rs.next());
+		}else {
+			studentList = null; 
+		}
+		DBUtility.dbClose(con, pstmt, rs);
+		return studentList;
+	}
 	
 	public static boolean studentInsert(StudentVO svo) throws SQLException {
-		// Conection
-		boolean successFlag = false; 
-		Connection con = null;
-		CallableStatement cstmt = null;
-		PreparedStatement pstmt = null;
-
-		// 1 Load, 2. connect
-		con = DBUtility.dbCon();
-
-		pstmt = con.prepareStatement(STUDENT_INSERT);
-		pstmt.setString(1, svo.getName());
-		
-
-		int result1 = pstmt.executeUpdate();
-		System.out.println((result1 != 0) ? "입력성공" : "입력실패");
-
-		cstmt = con.prepareCall(STUDENT_CALL_RANK_PROC);
-		int result2 = cstmt.executeUpdate();
-		System.out.println((result2 != 0) ? "프로시저성공" : "프로시저실패");
-
-		DBUtility.dbClose(con, pstmt, cstmt);
-		successFlag = (result1 != 0 && result2 != 0) ? true : false;
-		
-		return successFlag; 
+		System.out.println();
 	}
 
 	public static boolean studentUpdate(StudentVO svo) throws SQLException {

@@ -51,7 +51,7 @@ public class SubjectMain {
 		}//end of file
 	}
 	//수강신청정보
-	private static void traineeMenu() {
+	private static void traineeMenu() throws SQLException {
 		int no;
 		TraineeRegisterManager trm = new TraineeRegisterManager();  
 
@@ -60,19 +60,23 @@ public class SubjectMain {
 		switch (no) {
 		case TRAINEE_CHOICE.INSERT:
 			System.out.println("");
-		//	srm.insertManager();
+			trm.insertManager();
 			break;
 		case TRAINEE_CHOICE.UPDATE:
 			System.out.println("");
-//			studnetManager.studnetUpdate();
+			trm.updateManager();
 			break;
 		case TRAINEE_CHOICE.LIST:
 			System.out.println("");
-//			studnetManager.studnetTotalList();
+			trm.SelectManager();
 			break;
 		case TRAINEE_CHOICE.DELETE:
 			System.out.println("");
-//			studnetManager.studnetTotalList();
+			trm.deleteManager();
+			break;
+		case TRAINEE_CHOICE.JOIN_LIST:
+			System.out.println("");
+			trm.totalSelectManager();
 			break;
 		case TRAINEE_CHOICE.MAIN:
 			return;
@@ -89,6 +93,10 @@ public class SubjectMain {
 		MenuViewer.lessonMenuView();
 		no = Integer.parseInt(sc.nextLine());
 		switch (no) {
+		case LESSON_CHOICE.LIST:
+			System.out.println("");
+			lrm.selectManager();
+			break;
 		case LESSON_CHOICE.INSERT:
 			System.out.println("");
 			lrm.insertManager();
@@ -97,13 +105,13 @@ public class SubjectMain {
 			System.out.println("");
 			lrm.updateManager();
 			break;
-		case LESSON_CHOICE.LIST:
-			System.out.println("");
-			lrm.selectManager();
-			break;
 		case LESSON_CHOICE.DELETE:
 			System.out.println("");
 			lrm.deleteManager();
+			break;
+		case LESSON_CHOICE.SORT:
+			System.out.println("");
+			lrm.selectSortManager();
 			break;
 		case LESSON_CHOICE.MAIN:
 			return;
@@ -146,6 +154,7 @@ public class SubjectMain {
 			System.out.println("해당 메뉴 번호만 입력하세요.");
 		}
 	}
+	
 	//학생정보
 	private static void studentMenu() throws SQLException {
 		int no;
@@ -160,15 +169,15 @@ public class SubjectMain {
 			break;
 		case STUDENT_CHOICE.UPDATE:
 			System.out.println("");
-//			studnetManager.studnetUpdate();
+			srm.updateManager();
 			break;
 		case STUDENT_CHOICE.LIST:
 			System.out.println("");
-//			studnetManager.studnetTotalList();
+			srm.selectManager();
 			break;
 		case STUDENT_CHOICE.DELETE:
 			System.out.println("");
-//			studnetManager.studnetTotalList();
+			srm.deleteManager();
 			break;
 		case STUDENT_CHOICE.MAIN:
 			return;
