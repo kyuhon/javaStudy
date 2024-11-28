@@ -24,9 +24,11 @@ import org.xml.sax.SAXException;
 import publicDataTest.model.LandPriceVO;
 
 public class PublicDataAPITest {
-
+	
+	
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
+		int no
 		ArrayList<LandPriceVO> landPriceList = apiDataLoad();
 		printLandPriceList(landPriceList);
 
@@ -41,7 +43,7 @@ public class PublicDataAPITest {
 		// 1. url 주소를 적는다.
 		StringBuilder urlBuilder = null;
 		// 객체를 가져오는데 디비에서 가져오는게 아니라 공공데이터서버에서 네트워크로 가져오는 것
-		ArrayList<LandPriceVO> landPriceList = new ArrayList<LandPriceVO>();
+		ArrayList<LandPriceVO> landPriceList = new Arr;ayList<LandPriceVO>();
 
 		try {
 			urlBuilder = new StringBuilder("https://apis.data.go.kr/1613000/BusSttnInfoInqireService/getSttnNoList");
