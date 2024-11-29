@@ -11,8 +11,9 @@ import publicDataTest.model.LandPriceVO;
 
 
 public class LandPriceRegisterManager {
-	public static Scanner sc = new Scanner(System.in); 
-	//전체 학생리스트를 출력요청
+	public Scanner sc = new Scanner(System.in); 
+	
+	//과목목록(select)
 	public void selectManager() throws SQLException {
 		LandPriceDAO ldao = new LandPriceDAO(); 
 		//화면으로부터 입력받는다.
@@ -59,7 +60,7 @@ public class LandPriceRegisterManager {
 			LandPriceDAO ldao = new LandPriceDAO(); 
 			LandPriceVO lvo = new LandPriceVO();
 	        //수정하기 전체출력요청
-	        ArrayList<LandPriceVO> list = ldao.landPriceSelect(lvo); 
+	        ArrayList<LandPriceVO> list = ldao.landPriceSelect(); 
 	        
 	        if(list.size() != 0) {
 	            printLessonList(list); 
@@ -88,9 +89,9 @@ public class LandPriceRegisterManager {
 
 	        //화면출력
 	        if(successFlag == true) {
-	            System.out.println(no+"과목을 수정 하였습니다.");
+	            System.out.println(nodeno+"과목을 수정 하였습니다.");
 	        }else {
-	            System.out.println(no +"과목을 수정 실패 하였습니다.");
+	            System.out.println(nodeno +"과목을 수정 실패 하였습니다.");
 	        }
 	}
 
@@ -102,21 +103,23 @@ public class LandPriceRegisterManager {
 
 	public void deleteManager() throws SQLException {
 		LandPriceDAO ldao = new LandPriceDAO(); 
-		LandPriceVO lvo = new LandPriceVO();
-		ArrayList<LessonVO> lessonList = ldao.lessonSelect(lvo); 
+		ArrayList<LandPriceVO> lessonList = ldao.landPriceSelect(); 
 		
 		//화면출력
 		if(lessonList.size() != 0) {
 			printLessonList(lessonList); 
 		}else {
 			System.out.println("출력할 데이터가 없습니다.");
+			return;
 		}
 	
 		//화면으로부터 입력받는다. 
 		System.out.print("삭제할번호>>");
 		int no = Integer.parseInt(sc.nextLine().trim());
-		System.out.println("no="+no);
+		System.out.println("nodeno="+nodeno);
 		LandPriceVO lvo = new LandPriceVO();
+		lvo.setNodeno(nodeno);
+		boolean successFlag = ldao.landPriceDelete(lvo);
 		//화면출력
 		if(successFlag == true) {
 			System.out.println(no +"번호를 삭제 하였습니다.");
