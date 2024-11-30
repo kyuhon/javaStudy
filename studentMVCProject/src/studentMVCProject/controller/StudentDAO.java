@@ -85,8 +85,8 @@ public class StudentDAO {
 	public static boolean studentUpdate(StudentVO svo) throws SQLException {
 		boolean successFlag = false; 
 		Connection con = null;
-		CallableStatement cstmt = null;
 		PreparedStatement pstmt = null;
+		CallableStatement cstmt = null;
 
 		con = DBConnection.dbCon();
 		pstmt = con.prepareStatement(updateSQL);
@@ -129,8 +129,8 @@ public class StudentDAO {
 
 		con = DBConnection.dbCon();
 		stmt = con.createStatement();
-		rs = stmt.executeQuery(selectSQL);
-
+		rs = stmt.executeQuery(sortSQL);
+ 
 		if(rs.next()) {
 			do {
 				int no = rs.getInt("NO");
